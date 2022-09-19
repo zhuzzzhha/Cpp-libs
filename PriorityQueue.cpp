@@ -1,4 +1,4 @@
-﻿// PriorityQueue.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// PriorityQueue.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -27,16 +27,18 @@ struct Queue {
 	void push(int value)
 	{
 		Node* ind = head.get();
+		Node* prev = head.get();
+		if (value > ind->data)
+			ind = (ind->next).get();
 		while (value > ind->data)
 		{
 			ind=(ind->next).get();
+			prev = (prev->next).get();
 		}
-		while (ind->next != nullptr)
-		{
-			ind->data = value;
-			ind = (ind->next).get();
-		}
-
+		Node* new_value;
+		new_value->data = value;
+		new_value->next = *(ind);
+		prev->next = *(new_value);
 		
 	}
 	void pop()
