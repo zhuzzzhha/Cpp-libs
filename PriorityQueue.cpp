@@ -37,7 +37,7 @@ struct Queue {
 		}
 		Node* new_value;
 		new_value->data = value;
-		new_value->next = *(ind);
+		new_value->next = std::move(prev->next);
 		prev->next = *(new_value);
 		
 	}
