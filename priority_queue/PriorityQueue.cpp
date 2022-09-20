@@ -1,6 +1,10 @@
 // PriorityQueue.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
+
+#pragma once
+#ifndef QUEUE_QUEUE_H
+#define QUEUE_QUEUE_H
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -10,11 +14,11 @@ struct Queue {
 	struct Node {
 		T data;
 		std::unique_ptr <Node> next;
-		Node():
+		Node() :
 			data(0),
 			next(nullptr)
 		{}
-		Node(T value):
+		Node(T value) :
 			data(value),
 			next(nullptr)
 		{}
@@ -28,7 +32,7 @@ struct Queue {
 	Queue() = default;
 	Queue(const std::vector<T>& v)
 	{
-		
+
 		for (int i = 0; i < v.size(); i++)
 		{
 			push(v[i]);
@@ -41,16 +45,16 @@ struct Queue {
 		Node* prev = head.get();
 		if (value > ind->data)
 			ind = (ind->next).get();
-		while (value > ind->data && ind->next!=nullptr)
+		while (value > ind->data && ind->next != nullptr)
 		{
-			ind=(ind->next).get();
+			ind = (ind->next).get();
 			prev = (prev->next).get();
 		}
 		Node* new_value;
 		new_value->data = value;
 		new_value->next = std::move(prev->next);
 		prev->next = *(new_value);
-		
+
 	}
 	void pop()
 	{
@@ -59,9 +63,29 @@ struct Queue {
 	T top()
 	{
 		return head->data;
-	}
+	}	
 };
-int main()
+template <class T>
+std::ostream& operator<<(std::ostream& ostream, const Queue<T>& temp)
 {
-	return 0;
+	while (temp->next != nullptr)
+	{
+		ostream << temp.top() << ' ';
+		temp.pop();
+	}
+	return ostream;
 }
+template <class T>
+std::istream& operator>>(std::istream& istream, Queue<T>& temp)
+{
+	std::vector<T> c;
+	for (int i = 0; i < c.size(); i++)
+	{
+		istream >> c[i];
+		temp.push(c[i]);
+	}
+	return istream;
+}
+
+
+#endif
