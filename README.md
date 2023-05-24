@@ -1,7 +1,7 @@
 ## C++ libraries
-#Complex
+# Complex
 Библиотека для работы с комплексными числами
-#Rational
+# Rational
 Библиотека для работы с комплексными числами
-#Bitset
+# Bitset
 Реализация bitset
